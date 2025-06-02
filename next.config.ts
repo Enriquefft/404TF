@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
-
+import createNextIntlPlugin from "next-intl/plugin";
 import "./src/env.ts";
+
+const withNextIntl = createNextIntlPlugin();
+
 const nextConfig: NextConfig = {
 	eslint: {
 		// Warning: This allows production builds to successfully complete even if
@@ -31,4 +34,4 @@ const nextConfig: NextConfig = {
 	transpilePackages: ["@t3-oss/env-nextjs", "@t3-oss/env-core"],
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

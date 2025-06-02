@@ -44,14 +44,17 @@
 		from {
 			height: 0;
 		}
+
 		to {
 			height: var(--radix-accordion-content-height);
 		}
 	}
+
 	@keyframes accordion-up {
 		from {
 			height: var(--radix-accordion-content-height);
 		}
+
 		to {
 			height: 0;
 		}
@@ -61,9 +64,11 @@
 @utility container {
 	margin-inline: auto;
 	padding-inline: 2rem;
+
 	@media (width >= --theme(--breakpoint-sm)) {
 		max-width: none;
 	}
+
 	@media (width >= 1400px) {
 		max-width: 1400px;
 	}
@@ -88,89 +93,133 @@
 }
 
 @layer base {
-	/* Color Variables */
+	/*────────────────────────────────────────────────────────────────────────
+    1) Base color tokens (all in HSL “h s% l%” format)
+    ────────────────────────────────────────────────────────────────────────*/
 	:root {
-		/* Base Colors */
-		--color-white: 0 0% 100%;
-		/* Update black to a softer dark for body text */
-		--color-black: 210 10% 25%;
-		/* Use a soft light blue for backgrounds */
-		--color-gray-light: 210 50% 95%;
-		--color-gray-medium: 0 0% 89.8%;
-		--color-gray-dark: 0 0% 45.1%;
-		/* Primary: Deep Vibrant Blue for trust & professionalism */
-		--color-primary: 220 90% 30%;
-		--color-primary-foreground: 0 0% 100%;
-		--color-destructive: 0 84.2% 60.2%;
-		--color-destructive-dark: 0 62.8% 30.6%;
+		/* NEUTRALS */
+		--color-white: 0 0% 98%;
+		/* near-white (#FAFAFA) */
+		--color-black: 0 0% 7%;
+		/* near-black (#111111) */
+
+		--color-gray-light: 0 0% 98%;
+		/* same as near-white */
+		--color-gray-medium: 0 0% 88%;
+		/* #E0E0E0 */
+		--color-gray-dark: 0 0% 27%;
+		/* #444444 */
+
+		/* PRIMARY */
+		--color-primary: 260 84% 51%;
+		/* #5E17EB */
+		--color-primary-foreground: 0 0% 98;
+		/* near-white for text on primary */
+
+		/* SECONDARY (Purple-Alt) */
+		--color-secondary: 260 100% 66%;
+		/* #8C52FF */
+		--color-secondary-foreground: 0 0% 98;
+		/* near-white for text on secondary */
+
+		/* DESTRUCTIVE */
+		--color-destructive: 0 65% 51%;
+		/* #D32F2F – standard “danger red” */
+		--color-destructive-dark: 0 65% 30%;
+		/* darker red (~#8B1A1A) for dark modes */
+		/* Note: we keep the same “danger red” in light mode, and a darker variant in dark mode. */
+
 		--color-radius: 0.5rem;
 
+		/* ACCENT (Turquoise) */
+		--color-accent: 151 100% 37%;
+		/* #00BF63 */
+		--color-accent-foreground: 0 0% 98;
+		/* near-white on turquoise */
+
+		/* CHART COLORS (unchanged) */
 		--color-chart-1: 12 76% 61%;
+		/* #F46A19 */
 		--color-chart-2: 173 58% 39%;
+		/* #00BF63 */
 		--color-chart-3: 197 37% 24%;
+		/* #003B4A */
 		--color-chart-4: 43 74% 66%;
+		/* #E5D547 */
 		--color-chart-5: 27 87% 67%;
+		/* #FADA17 */
 
-		--dark-color-white: 0 0% 98%;
-		--dark-color-black: 0 0% 3.9%;
-		--dark-color-gray-light: 0 0% 14.9%;
-		--dark-color-gray-medium: 0 0% 14.9%;
-		--dark-color-gray-dark: 0 0% 63.9%;
-		--dark-color-primary: 220 90% 30%;
-		--dark-color-primary-foreground: 0 0% 100%;
-
-		--dark-color-chart-1: 220 70% 50%;
-		--dark-color-chart-2: 160 60% 45%;
-		--dark-color-chart-3: 30 80% 55%;
-		--dark-color-chart-4: 280 65% 60%;
-		--dark-color-chart-5: 340 75% 55%;
-
-		/* Accent: Vibrant Turquoise for CTAs/links */
-		--accent: 174 70% 40%;
-		--accent-foreground: 0 0% 100%;
+		/* HOUSE COLORS (just in case you want these anywhere) */
+		--color-house-biotech: 173 100% 37%;
+		/* #00BF63 */
+		--color-house-hardware: 45 100% 50%;
+		/* #FFB400 */
+		--color-house-ai: 328 60% 70%;
+		/* #FF66C4 */
 	}
 
-	/* Light Theme */
+	/*────────────────────────────────────────────────────────────────────────
+    2) Light-theme assignments
+    ────────────────────────────────────────────────────────────────────────*/
 	:root {
-		/* Base Colors */
+		/* Neutrals */
 		--white: var(--color-white);
 		--black: var(--color-black);
 		--gray-light: var(--color-gray-light);
 		--gray-medium: var(--color-gray-medium);
 		--gray-dark: var(--color-gray-dark);
+
+		/* Primary & Secondary & Destructive */
 		--primary-color: var(--color-primary);
 		--primary-foreground-color: var(--color-primary-foreground);
+
+		--secondary: var(--color-secondary);
+		--secondary-foreground: var(--color-secondary-foreground);
+
 		--destructive-color: var(--color-destructive);
+
 		--radius: var(--color-radius);
 
-		/* Backgrounds */
-		--background: hsl(210, 50%, 98%); /* Very light blue background */
-		--foreground: var(--black); /* Softer dark text */
-		--card-background: hsl(210, 50%, 98%);
-		--popover-background: hsl(210, 50%, 98%);
+		/* BACKGROUNDS */
+		--background: hsl(210 50% 98%);
+		/* very-light blue background */
+		--foreground: var(--black);
 
-		/* Foregrounds */
+		--card-background: hsl(210 50% 98%);
+		--popover-background: hsl(210 50% 98%);
+
+		/* FOREGROUNDS (inside cards/popovers/etc) */
 		--card-foreground: var(--black);
 		--popover-foreground: var(--black);
+
 		--primary-foreground: var(--primary-foreground-color);
-		--secondary-foreground: var(--primary-color);
+		/* “Text-on-secondary” on a light plate can safely use the purple alt */
+		--secondary-foreground: var(--secondary);
 		--muted-foreground: var(--gray-dark);
-		--accent-foreground: var(--primary-color);
-		--destructive-foreground: var(--primary-foreground-color);
+		--accent-foreground: var(--color-accent-foreground);
+		--destructive-foreground: var(--color-primary-foreground);
 
-		/* Buttons */
+		/* BUTTON / LINK COLORS */
 		--primary: var(--primary-color);
-		--secondary: hsl(210, 50%, 95%); /* Soft light blue for secondary buttons */
+		/* #5E17EB */
+		--secondary: var(--secondary);
+		/* #8C52FF */
 		--muted: var(--gray-light);
-		--accent: hsl(174, 70%, 40%); /* Vibrant turquoise accent */
+		/* near-white */
+		--accent: var(--color-accent);
+		/* #00BF63 */
 		--destructive: var(--destructive-color);
+		/* #D32F2F */
 
-		/* Borders and Inputs */
+		/* Borders & Inputs & Ring */
 		--border: var(--gray-medium);
+		/* #E0E0E0 */
 		--input: var(--gray-medium);
+		/* #E0E0E0 */
 		--ring: var(--black);
+		/* near-black for focus rings */
 
-		/* Charts */
+		/* CHART COLORS */
 		--chart-1: var(--color-chart-1);
 		--chart-2: var(--color-chart-2);
 		--chart-3: var(--color-chart-3);
@@ -178,52 +227,77 @@
 		--chart-5: var(--color-chart-5);
 	}
 
-	/* Dark Theme */
+	/*────────────────────────────────────────────────────────────────────────
+    3) Dark-theme overrides
+    ────────────────────────────────────────────────────────────────────────*/
 	.dark {
-		/* Base Colors */
-		--white: var(--dark-color-white);
-		--black: var(--dark-color-black);
-		--gray-light: var(--dark-color-gray-light);
-		--gray-medium: var(--dark-color-gray-medium);
-		--gray-dark: var(--dark-color-gray-dark);
-		/* Use the same primary color in dark mode for brand consistency */
+		/* Neutrals */
+		--white: var(--color-white);
+		/* still near-white for any “text on dark” */
+		--black: var(--color-black);
+		/* still near-black for backgrounds */
+
+		/* For clarity, we’ll flip “gray-light/medium/dark” around so things remain legible in dark mode */
+		--gray-light: var(--gray-dark);
+		/* mid gray (#444444) */
+		--gray-medium: var(--gray-dark);
+		/* same mid gray (#444444) */
+		--gray-dark: var(--gray-medium);
+		/* (#E0E0E0) for muted-on-dark if needed */
+
+		/* Primary & Secondary & Destructive in dark mode */
 		--primary-color: var(--color-primary);
 		--primary-foreground-color: var(--color-primary-foreground);
+
+		--secondary: var(--color-secondary);
+		/* On dark backgrounds, “text-on-secondary” should be near-white for contrast */
+		--secondary-foreground: var(--color-white);
+
+		/* Use the darker shade of red for destructive actions in dark mode */
 		--destructive-color: var(--color-destructive-dark);
 
-		/* Backgrounds */
 		--background: var(--black);
 		--foreground: var(--white);
+
 		--card-background: var(--black);
 		--popover-background: var(--black);
 
-		/* Foregrounds */
 		--card-foreground: var(--white);
 		--popover-foreground: var(--white);
+
 		--primary-foreground: var(--primary-foreground-color);
-		--secondary-foreground: var(--white);
-		--muted-foreground: var(--gray-dark);
+		--muted-foreground: var(--gray-medium);
 		--accent-foreground: var(--white);
 		--destructive-foreground: var(--white);
 
-		/* Buttons */
+		/* BUTTON / LINK COLORS in dark mode */
 		--primary: var(--primary-color);
-		--secondary: var(--gray-light);
-		--muted: var(--gray-light);
-		--accent: hsl(174, 70%, 40%);
+		/* still #5E17EB */
+		/* “Secondary” buttons in dark: pick a mid-gray to avoid a pure white button */
+		--secondary: var(--gray-dark);
+		/* #E0E0E0 or #444444, depending on context */
+		/* Muted components in dark = mid gray */
+		--muted: var(--gray-medium);
+		/* #E0E0E0 (lighter muted text on black) */
+		--accent: var(--color-accent);
+		/* #00BF63 still works on dark */
 		--destructive: var(--destructive-color);
+		/* darker red in dark mode */
 
-		/* Borders and Inputs */
-		--border: var(--gray-medium);
-		--input: var(--gray-medium);
+		/* Borders, Inputs, Ring in dark */
+		--border: var(--gray-light);
+		/* #444444 */
+		--input: var(--gray-light);
+		/* #444444 */
 		--ring: var(--white);
+		/* white focus ring on “near-black” */
 
-		/* Charts */
-		--chart-1: var(--dark-color-chart-1);
-		--chart-2: var(--dark-color-chart-2);
-		--chart-3: var(--dark-color-chart-3);
-		--chart-4: var(--dark-color-chart-4);
-		--chart-5: var(--dark-color-chart-5);
+		/* CHART COLORS (same as light) */
+		--chart-1: var(--color-chart-1);
+		--chart-2: var(--color-chart-2);
+		--chart-3: var(--color-chart-3);
+		--chart-4: var(--color-chart-4);
+		--chart-5: var(--color-chart-5);
 	}
 }
 
@@ -231,6 +305,7 @@
 	* {
 		@apply border-border;
 	}
+
 	body {
 		@apply bg-background text-foreground;
 	}

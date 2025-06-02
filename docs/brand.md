@@ -76,8 +76,8 @@ ES (50 w): 404 Tech Found es la pre-incubadora deep-tech de LATAM, creada por fu
 
 | Variant                  | Preview                                 | Use case                  |
 | ------------------------ | --------------------------------------- | ------------------------- |
-| **Horizontal lock-up**   | ![404 logo](../public/404_logo_black.png) | Website nav, deck footers |
-| **Inverse (near-white)** | ![inverse](../public/404_logo_white.png)          | Dark bgs / gradients      |
+| **Horizontal lock-up**   | ![404 logo](../public/logos/404_logo_black.png) | Website nav, deck footers |
+| **Inverse (near-white)** | ![inverse](../public/logos/404_logo_white.png)          | Dark bgs / gradients      |
 | **Isotype-only**            | ![icon](../public/icon.png)                   | Favicon, social avatar    |
 
 
@@ -105,6 +105,9 @@ purple-alt:  #8C52FF  #CMYK 55/63/ 0/ 0  #Pantone 265 C
 biotech:     #00BF63  #CMYK 80/ 0/75/ 0  #Pantone 354 C
 hardware:    #FFB400  #CMYK  0/35/100/ 0 #Pantone 1375 C
 ai:          #FF66C4  #CMYK  0/60/ 0/ 0  #Pantone 212 C
+space:       #38B6FF
+
+Destructive: #f24545
 ```
 
 *All fg/bg combos must ≥ 7 : 1 contrast.*
