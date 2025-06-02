@@ -138,6 +138,7 @@ background: radial-gradient(circle at 30% 30%, #00BF63, #111111);
 
 ### 4.5 Mascot – **“Tardi”**
 
+![Tardi](../public/Mascot.png)
 | Item          | Detail                                                                              |
 | ------------- | ----------------------------------------------------------------------------------- |
 | Master        | `tardi_master.png`                                           |
