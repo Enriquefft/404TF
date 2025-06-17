@@ -7,7 +7,7 @@
 | Element              | Definition                                                                                                                                   |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Purpose (10 yr)**  | *Catalyse a LATAM deep-tech renaissance by turning breakthrough science into venture-grade companies, right where the talent is.*            |
-| **Mission (1–3 yr)** | *Become Perú’s #1 deep-tech pre-incubator—graduating multiple “404 Founders” and launching our venture-builder/accelerator arm.*                   |
+| **Mission (1–3 yr)** | *Become Perú’s #1 deep-tech pre-incubator—graduating multiple “404 Founders” and launching our venture-builder/accelerator arm.*             |
 | **Primary tagline**  | **“Building the 404 deep-tech startups of LATAM.”**                                                                                          |
 | **Positioning**      | *Built by deep-tech founders, for deep-tech founders.*                                                                                       |
 | **Archetype**        | **Maverick × Explorer** — rebellious, pioneering, boundary-pushing.                                                                          |
@@ -19,7 +19,7 @@
 | ----------- | ---------------------------------------------------- |
 | **2025 Q2** | Deeptech Meetup #01 → proof of community demand      |
 | **2025 Q3** | Pre-incubator Cohort α (18 teams)                    |
-| **2025 Q4** | Start our consultory, we know how to create deeptech                    |
+| **2025 Q4** | Start our consultory, we know how to create deeptech |
 | **2026 Q2** | Launch full **Incubator** track + micro-fund         |
 | **2027 Q1** | **Venture-Builder** studio → 3 in-house spin-outs    |
 | **2030 Q4** | 100 LATAM deep-tech companies backed, 5 global exits |
@@ -74,12 +74,11 @@ ES (50 w): 404 Tech Found es la pre-incubadora deep-tech de LATAM, creada por fu
 
 ### 4.1 Logo
 
-| Variant                  | Preview                                 | Use case                  |
-| ------------------------ | --------------------------------------- | ------------------------- |
+| Variant                  | Preview                                         | Use case                  |
+| ------------------------ | ----------------------------------------------- | ------------------------- |
 | **Horizontal lock-up**   | ![404 logo](../public/logos/404_logo_black.png) | Website nav, deck footers |
-| **Inverse (near-white)** | ![inverse](../public/logos/404_logo_white.png)          | Dark bgs / gradients      |
-| **Isotype-only**            | ![icon](../public/icon.png)                   | Favicon, social avatar    |
-
+| **Inverse (near-white)** | ![inverse](../public/logos/404_logo_white.png)  | Dark bgs / gradients      |
+| **Isotype-only**         | ![icon](../public/icon.png)                     | Favicon, social avatar    |
 
 #### Mis-use examples
 
@@ -124,34 +123,69 @@ background: radial-gradient(circle at 30% 30%, #00BF63, #111111);
 
 ### 4.3 Typography
 
-| Level   | Typeface           | Weight / Size / Tracking |
-| ------- | ------------------ | ------------------------ |
-| Logo    | **Orion**          | custom glyphs            |
-| H1      | **Orbitron**       | 700 · 48 px · 0          |
-| H2      | Orbitron           | 600 · 32 px · 0.5        |
-| Body    | **Inter**          | 400 · 16 px · 0.2        |
-| Caption | Inter              | 400 · 14 px · 0.3        |
-| Code    | **JetBrains Mono** | 400 · 14 px              |
+| Level   | Typeface             | Weight / Size / Tracking |
+| ------- | -------------------- | ------------------------ |
+| Logo    | **Orion**            | custom glyphs            |
+| H1      | **Orbitron**         | 700 · 48 px · 0          |
+| H2      | Orbitron             | 600 · 32 px · 0.5        |
+| Body    | **Inter**            | 400 · 16 px · 0.2        |
+| Caption | Inter                | 400 · 14 px · 0.3        |
+| Code    | **JetBrains Mono**   | 400 · 14 px              |
 
 *Fallback stack*: `Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif`.
 *Line-height*: 1.35; baseline grid 4 px.
 
+### 4.4 Supporting imagery
+
+Las imágenes de soporte refuerzan la identidad visual y se utilizan en diferentes formatos de contenido:
+
+#### Publicaciones Informativas
+
+* Fondos minimalistas con color plano o degradados en tonos primarios/secundarios.
+* Elementos de interfaz digital como gráficos de datos o HUDs futuristas.
+* Representaciones visuales de conceptos deeptech (ADN, células, circuitos, redes neuronales).
+
+#### Videos Promocionales
+
+* Estética con transiciones fluidas y efectos glitch.
+* Imágenes de personas trabajando en laboratorios o startups tecnológicas.
+* Escenarios de ciudades futuristas con tecnología integrada.
+
+#### Anuncios y Noticias
+
+* Mockups de documentos clasificados con diseño tech.
+* Estilo "hacker" con tipografía monoespaciada y overlays digitales.
+* Capturas de terminales futuristas con código en ejecución.
+
+#### Contenido Disruptivo / Shitpost Tech
+
+* Efectos glitch y distorsión visual.
+* Capturas de errores 404 estilizadas con efectos neon.
+* Memes basados en referencias de ciencia, startups y deeptech.
+
+#### Ejemplos
+##### Persona
+![persona](../public/images/person_placeholder.png)
+##### Fondo - bacteria
+![bacteria](../public/images/bacteria.png)
+
 ### 4.5 Mascot – **“Tardi”**
 
 ![Tardi](../public/Mascot.png)
+
 | Item          | Detail                                                                              |
 | ------------- | ----------------------------------------------------------------------------------- |
-| Master        | `tardi_master.png`                                           |
+| Master        | `tardi_master.png`                                                                  |
 | Allowed edits | Minor expression, accessories; **no** hue-shift or horizontal flip (cyber-eye left) |
-| Usage         | Community & swag. Formal docs → only in team slide footer @ 16 % opacity.         |
+| Usage         | Community & swag. Formal docs → only in team slide footer @ 16 % opacity.           |
 
 ### 4.6 Programme Houses
 
-| House    | Colour    | Tagline                               | Icon (SVG)         |
-| -------- | --------- | ------------------------------------- | ------------------ |
-| Biotech  | `#00BF63` | “Evolving life, engineering futures.” | `logo_biotech.svg`     |
-| Hardware | `#FFB400` | “Atoms to products.”                  | `logo_hardware.svg` |
-| AI       | `#FF66C4` | “Code that thinks.”                   | `logo_ai.svg`  |
+| House    | Colour    | Tagline                               | Logos (PNG)          |
+| -------- | --------- | ------------------------------------- | ------------------- |
+| Biotech  | `#00BF63` | “Evolving life, engineering futures.” |  ![logo_biotech](../public/logos/logo_biotech.png) |
+| Hardware | `#FFB400` | “Atoms to products.”                  |  ![logo_hardware](../public/logos/logo_hardware.png) |
+| AI       | `#FF66C4` | “Code that thinks.”                   | ![logo_ai](../public/logos/logo_ai.png) |
 
 House banners: core logo top-left + 4 px colour bar full-width.
 
@@ -166,38 +200,40 @@ House banners: core logo top-left + 4 px colour bar full-width.
 | Alt-text      | Mandatory (EN & ES) for every published asset    |
 
 ---
+
 ## 8 · Measurement, traction & KPIs
 
 ### 404 Deeptech Meetup
 
-- 300 registrations
-- +200 attendants
+* 300 registrations
+* +200 attendants
 
 ### Deeptech Summit
 
-- Starting late september
+* Starting late September
 
 ### Deeptech pre-incubator
 
-- 92 registrations
-- Starting late june
+* 92 registrations
+* Starting late June
 
 ---
+
 ### 8 · Benchmark & Case-Study Gallery — **extended**
 
-| Name                                           | What it is                                                                   | Why it matters to 404                                                              | Key tactics / angles to dissect                                                                                                                           |
-| ---------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **GRIDX (Grid Exponential)**<br>🇦🇷 Argentina | LATAM biotech **company-builder** & VC (80 + startups, 7 countries).         | Closest regional proxy for our future *venture-builder studio* model.              | • Annual science-talent funnel & “BioHack” bootcamps.<br>• Small cheques + lab access.<br>• Corporate-VC syndication playbook.                            |
-| **BITKRAFT Ventures**<br>🇩🇪 / 🇺🇸 Global    | \$1 B + AUM sector fund in gaming / XR / “Synthetic Reality.”                | Gold-standard website UX & narrative;                                              | • Scroll-based theses pages.<br>• Thematic research reports.<br>• Active Discord & newsletter funnel.                                                     |
-| **Hello Tomorrow**<br>🇫🇷 France              | Flagship **deep-tech summit** & global startup challenge.                    | Benchmark for the signature events we want by 2026.                                | • Startup competition feeding press buzz.<br>• 1-on-1 investor meeting app.<br>• Neon grid stage graphics.                                                |
-| **Y Combinator** (YC)<br>🇺🇸 USA              | Iconic 3-month **seed accelerator**; Demo Day model.                         | Playbook for founder-centred culture & alumni fly-wheel.                           | • Weekly dinners / guest founders.<br>• Open-source Startup School library.<br>• Demo Day as media event.                                                 |
-| **MIT The Engine**<br>🇺🇸 USA                 | “Tough-tech” **incubator + fund** with 220 k ft² labs.                       | Reference for cap-ex infra & hybrid governance.                                    | • Wet-labs / fab-shops.<br>• Builder-Platform services slate.<br>• Annual *Tough-Tech Landscape* report.                                                  |
-| **IndieBio (SOSV)**<br>🇺🇸/🇮🇪 Global        | \$525 k pre-seed + biolabs; 270 companies.                                   | Closest pedagogy to our bench-to-biz flow.                                         | • 100-day sprint.<br>• Dual hubs SF/NYC.<br>• Long-hold follow-ons.                                                                                       |
-| **Start-Up Chile**<br>🇨🇱 Chile               | Govt-backed equity-free **accelerator**.                                     | LATAM public-sector model → potential PERÚ alliance template.                      | • Seed grants.<br>• Founder visas.<br>• Public impact dashboards.                                                                                         |
-| **HAX (SOSV)**<br>🇨🇳/🇺🇸 Global             | 18-month hard-tech residency; \$250-500 k.                                   | Blueprint for our future **Hardware House** track.                                 | • Shenzhen supply-chain immersion.<br>• Extended residency vs. classic accel.                                                                             |
-| **UTEC Ventures**<br>🇵🇪 Peru                 | University-backed **accelerator & pre-incubation** hub (2014 −).             | Natural partner & talent feeder; Peru’s best-known tech accelerator.               | • Three-tier ladder (Future Founders → Pre-IncUVa → IncUVa).<br>• Corporate challenge sprints (Femlab, Cimientos).<br>• GAN Network + strong local press. |
-| **Bioincuba (UPCH)**<br>🇵🇪 Peru              | University Cayetano Heredia’s **biotech incubator** (10 yrs, 80 + projects). | Peer in life-science vertical in Perú; potential pipeline & shared lab resources.          | • Free advisory for ProInnóvate / Startup Perú grants (S/150 k).<br>• “Lab to Market” female founder programme.<br>• Deep academic research links.        |
-
+| Name                                           | What it is                                                                   | Why it matters to 404                                                             | Key tactics / angles to dissect                                                                                                                           |
+| ---------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **GRIDX (Grid Exponential)**<br>🇦🇷 Argentina | LATAM biotech **company-builder** & VC (80 + startups, 7 countries).         | Closest regional proxy for our future *venture-builder studio* model.             | • Annual science-talent funnel & “BioHack” bootcamps.<br>• Small cheques + lab access.<br>• Corporate-VC syndication playbook.                            |
+| **BITKRAFT Ventures**<br>🇩🇪 / 🇺🇸 Global    | \$1 B + AUM sector fund in gaming / XR / “Synthetic Reality.”                | Gold-standard website UX & narrative;                                             | • Scroll-based theses pages.<br>• Thematic research reports.<br>• Active Discord & newsletter funnel.                                                     |
+| **Hello Tomorrow**<br>🇫🇷 France              | Flagship **deep-tech summit** & global startup challenge.                    | Benchmark for the signature events we want by 2026.                               | • Startup competition feeding press buzz.<br>• 1-on-1 investor meeting app.<br>• Neon grid stage graphics.                                                |
+| **Y Combinator** (YC)<br>🇺🇸 USA              | Iconic 3-month **seed accelerator**; Demo Day model.                         | Playbook for founder-centred culture & alumni fly-wheel.                          | • Weekly dinners / guest founders.<br>• Open-source Startup School library.<br>• Demo Day as media event.                                                 |
+| **MIT The Engine**<br>🇺🇸 USA                 | “Tough-tech” **incubator + fund** with 220 k ft² labs.                       | Reference for cap-ex infra & hybrid governance.                                   | • Wet-labs / fab-shops.<br>• Builder-Platform services slate.<br>• Annual *Tough-Tech Landscape* report.                                                  |
+| **IndieBio (SOSV)**<br>🇺🇸/🇮🇪 Global        | \$525 k pre-seed + biolabs; 270 companies.                                   | Closest pedagogy to our bench-to-biz flow.                                        | • 100-day sprint.<br>• Dual hubs SF/NYC.<br>• Long-hold follow-ons.                                                                                       |
+| **Start-Up Chile**<br>🇨🇱 Chile               | Govt-backed equity-free **accelerator**.                                     | LATAM public-sector model → potential PERÚ alliance template.                     | • Seed grants.<br>• Founder visas.<br>• Public impact dashboards.                                                                                         |
+| **HAX (SOSV)**<br>🇨🇳/🇺🇸 Global             | 18-month hard-tech residency; \$250-500 k.                                   | Blueprint for our future **Hardware House** track.                                | • Shenzhen supply-chain immersion.<br>• Extended residency vs. classic accel.                                                                             |
+| **UTEC Ventures**<br>🇵🇪 Peru                 | University-backed **accelerator & pre-incubation** hub (2014 −).             | Natural partner & talent feeder; Peru’s best-known tech accelerator.              | • Three-tier ladder (Future Founders → Pre-IncUVa → IncUVa).<br>• Corporate challenge sprints (Femlab, Cimientos).<br>• GAN Network + strong local press. |
+| **Bioincuba (UPCH)**<br>🇵🇪 Peru              | University Cayetano Heredia’s **biotech incubator** (10 yrs, 80 + projects). | Peer in life-science vertical in Perú; potential pipeline & shared lab resources. | • Free advisory for ProInnóvate / Startup Perú grants (S/150 k).<br>• “Lab to Market” female founder programme.<br>• Deep academic research links.        |
 
 ---
+
 > **404 Tech Found** — *Where anomalies thrive and tomorrow is engineered today.*
