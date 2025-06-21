@@ -18,7 +18,7 @@ export default function HomePage() {
 	const t = useTranslations("Home");
 
 	return (
-		<main className="min-h-screen bg-gradient-to-b from-[#1A0527] to-[#0A0011] text-gray-100">
+		<main className="min-h-screen">
 			{/* ──────────────────────────────────────────────────────────────── */}
 			{/* NAVBAR */}
 			{/* ──────────────────────────────────────────────────────────────── */}
