@@ -52,10 +52,19 @@
 			"rights": "Todos los derechos reservados."
 		}
 	},
-	"Rebrand": {
-		"title": "Estamos renovando el sitio",
-		"message": "Nuestra nueva imagen está en camino. Esta página aún no está lista para el público.",
-		"tagline": "Construyendo las startups deep-tech 404 de LATAM.",
-		"soon": "Vuelve pronto"
-	}
+        "Rebrand": {
+                "title": "Estamos renovando el sitio",
+                "message": "Nuestra nueva imagen está en camino. Esta página aún no está lista para el público.",
+                "tagline": "Construyendo las startups deep-tech 404 de LATAM.",
+                "soon": "Vuelve pronto"
+        },
+        "BioHack": {
+                "title": "404_BIO://HACK",
+                "intro": "Nuestro panel está por comenzar. Ayúdanos a priorizar preguntas ordenándolas abajo.",
+                "ask": "Pregunta nueva",
+                "submit": "Enviar",
+                "yourQuestions": "Tu lista priorizada",
+                "allQuestions": "Todas las preguntas",
+                "placeholder": "Escribe tu pregunta"
+        }
 }

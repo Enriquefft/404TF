@@ -150,13 +150,16 @@
 		/* #FADA17 */
 
 		/* HOUSE COLORS (just in case you want these anywhere) */
-		--color-house-biotech: 173 100% 37%;
-		/* #00BF63 */
-		--color-house-hardware: 45 100% 50%;
-		/* #FFB400 */
-		--color-house-ai: 328 60% 70%;
-		/* #FF66C4 */
-	}
+                --color-house-biotech: 173 100% 37%;
+                /* #00BF63 */
+                --color-house-hardware: 45 100% 50%;
+                /* #FFB400 */
+                --color-house-ai: 328 60% 70%;
+                /* #FF66C4 */
+                /* EVENT COLORS */
+                --color-biohack-green: 148 100% 15%;
+                /* #004A23 */
+        }
 
 	/*────────────────────────────────────────────────────────────────────────
     2) Light-theme assignments
