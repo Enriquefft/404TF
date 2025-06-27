@@ -1,53 +1,53 @@
 {
+	"BioHack": {
+		"allQuestions": "All questions",
+		"ask": "Ask a new question",
+		"askTitle": "Ask a question",
+		"intro": "Our panel is about to start. Help us prioritise questions by ordering them below.",
+		"placeholder": "Type your question",
+		"submit": "Submit",
+		"title": "404_BIO://HACK",
+		"yourQuestions": "Your priority list"
+	},
 	"Home": {
-		"preincubation": "Program",
-		"summit": "Summit",
-		"blog": "Blog",
-		"contact": "Contact",
-		"heroTitle": "Engineering the next anomaly.",
-		"heroSubtitle": "Where LATAM’s breakthroughs go from lab to launch.",
-		"hero": {
-			"preIncubation": "Pre-Incubation Program",
-			"deeptechSummit": "Deeptech Summit"
-		},
-		"preview": {
-			"preIncubation": {
-				"title": "Pre-incubation Program",
-				"subtitle": "Our inaugural cohort is in progress. Stay tuned for Cohort β.",
-				"cta": "Learn more"
-			},
-			"deeptechSummit": {
-				"title": "Deeptech Summit 2025",
-				"subtitle": "Join LATAM’s premier deep-tech event this September.",
-				"cta": "Get tickets"
-			}
-		},
 		"about": {
 			"heading": "About Us",
-			"text": "404 Tech Found is LATAM’s maverick deep-tech pre-incubator—built by founders for founders. We turn Biotech, AI, and Hardware breakthroughs into venture-grade startups.",
-			"learnMore": "Learn More"
+			"learnMore": "Learn More",
+			"text": "404 Tech Found is LATAM’s maverick deep-tech pre-incubator—built by founders for founders. We turn Biotech, AI, and Hardware breakthroughs into venture-grade startups."
 		},
-		"multimedia": {
-			"heading": "Multimedia Showcase",
-			"subheading": "Photos & videos from our recent events.",
-			"videoFallback": "Your browser does not support the video tag."
+		"blog": "Blog",
+		"contact": "Contact",
+		"corporatePartners": "Corporate Partners",
+		"footer": {
+			"rights": "All rights reserved."
 		},
 		"form": {
 			"heading": "Help us tailor your experience. Who are you?",
 			"subheading": "Choose one of the following so we can follow up with relevant info."
 		},
-		"investors": "Investors",
-		"corporatePartners": "Corporate Partners",
-		"governmentAgencies": "Government / Agencies",
 		"foundersResearchers": "Founders / Researchers",
+		"governmentAgencies": "Government / Agencies",
+		"hero": {
+			"deeptechSummit": "Deeptech Summit",
+			"preIncubation": "Pre-Incubation Program"
+		},
+		"heroSubtitle": "Where LATAM’s breakthroughs go from lab to launch.",
+		"heroTitle": "Engineering the next anomaly.",
+		"investors": "Investors",
 		"mediaPublic": "Media / Public",
+		"multimedia": {
+			"heading": "Multimedia Showcase",
+			"subheading": "Photos & videos from our recent events.",
+			"videoFallback": "Your browser does not support the video tag."
+		},
 		"newsletter": {
 			"heading": "Stay Connected",
-			"subheading": "Subscribe for updates, EN/ES.",
 			"placeholder": "Your email address",
+			"subheading": "Subscribe for updates, EN/ES.",
 			"subscribe": "Subscribe",
 			"whatsappCTA": "Join our WhatsApp Community"
 		},
+
 		"footer": {
 			"rights": "All rights reserved."
 		}
