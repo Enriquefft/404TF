@@ -51,5 +51,11 @@
 		"footer": {
 			"rights": "All rights reserved."
 		}
+	},
+	"Rebrand": {
+		"title": "We're refreshing our site",
+		"message": "Our new look is in the works. This page isn’t ready for public eyes.",
+		"tagline": "Building the 404 deep-tech startups of LATAM.",
+		"soon": "Check back soon!"
 	}
 }

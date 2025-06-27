@@ -10,6 +10,9 @@ Welcome to **404 Tech Found's** website project. This monorepo contains the code
 - **Database**: PostgreSQL accessed through Drizzle ORM. Environment variables live in `.env` (see `.env.example`).
 - **Internationalisation**: English and Spanish strings are in `messages/en.json` and `messages/es.json`.
 - **Brand assets**: design, tone and KPIs are documented in `docs/brand.md`.
+  Use that file as the single source of truth for any wording or mascot usage.
+- **UI library**: the site uses [ShadCN UI](https://ui.shadcn.com/) components
+  heavily, styled with TailwindCSS v4.
 
 ## 2. Development
 - Install dependencies with `bun install`.
@@ -49,6 +52,9 @@ When editing copy or UI texts, keep the tone defined in `docs/brand.md`:
 - Components shared between pages reside in `src/components/`.
 - Database schema is under `src/db/schema/`.
 - Markdown documents for planning and events go in `docs/`.
+- The file `src/styles/globals.css` is the main source of truth for all brand
+  colours. Use these variables via Tailwind's `var(--color)` syntax and avoid
+  hard-coding colour values in classes.
 
 ## 6. Pull Request Checklist
 Before opening a PR the agent must:
