@@ -28,6 +28,7 @@ interface Result {
 	id: number;
 	content: string;
 	votes: number;
+	pos: number | null;
 }
 
 export default function BioHackPage() {
@@ -118,83 +119,88 @@ export default function BioHackPage() {
 					<h1 className="text-4xl font-bold">{t("title")}</h1>
 					<p>{t("intro")}</p>
 				</div>
-				<div className="grid gap-6 md:grid-cols-2">
-					<Card className="bg-background/60 backdrop-blur">
-						<CardHeader>
-							<CardTitle>{t("yourQuestions")}</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<ul className="space-y-2">
-								{selected.map((q, idx) => (
-									<li
-										key={q.id}
-										className="flex items-center justify-between rounded-md border bg-background/80 px-3 py-2"
-									>
-										<span>{q.content}</span>
-										<div className="flex gap-1">
-											<Button size="icon" onClick={() => moveUp(idx)}>
-												↑
+				{!showResults && (
+					<div className="grid gap-6 md:grid-cols-2">
+						<Card className="bg-background/60 backdrop-blur">
+							<CardHeader>
+								<CardTitle>{t("yourQuestions")}</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ul className="space-y-2">
+									{selected.map((q, idx) => (
+										<li
+											key={q.id}
+											className="flex items-center justify-between rounded-md border bg-background/80 px-3 py-2"
+										>
+											<span className="mr-2 font-mono text-sm">{idx + 1}.</span>
+											<span className="flex-1">{q.content}</span>
+											<div className="flex gap-1">
+												<Button size="icon" onClick={() => moveUp(idx)}>
+													↑
+												</Button>
+												<Button size="icon" onClick={() => moveDown(idx)}>
+													↓
+												</Button>
+												<Button
+													size="icon"
+													variant="destructive"
+													onClick={() => removeSelected(idx)}
+												>
+													✕
+												</Button>
+											</div>
+										</li>
+									))}
+								</ul>
+							</CardContent>
+						</Card>
+						<Card className="bg-background/60 backdrop-blur">
+							<CardHeader>
+								<CardTitle>{t("allQuestions")}</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ul className="space-y-2">
+									{remaining.map((q) => (
+										<li
+											key={q.id}
+											className="flex items-center justify-between rounded-md border bg-background/80 px-3 py-2"
+										>
+											<span>{q.content}</span>
+											<Button size="sm" onClick={() => addToSelected(q)}>
+												+
 											</Button>
-											<Button size="icon" onClick={() => moveDown(idx)}>
-												↓
-											</Button>
-											<Button
-												size="icon"
-												variant="destructive"
-												onClick={() => removeSelected(idx)}
-											>
-												✕
-											</Button>
-										</div>
-									</li>
-								))}
-							</ul>
-						</CardContent>
-					</Card>
-					<Card className="bg-background/60 backdrop-blur">
-						<CardHeader>
-							<CardTitle>{t("allQuestions")}</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<ul className="space-y-2">
-								{remaining.map((q) => (
-									<li
-										key={q.id}
-										className="flex items-center justify-between rounded-md border bg-background/80 px-3 py-2"
-									>
-										<span>{q.content}</span>
-										<Button size="sm" onClick={() => addToSelected(q)}>
-											+
-										</Button>
-									</li>
-								))}
-							</ul>
-						</CardContent>
-					</Card>
-				</div>
-				<div className="flex justify-center gap-4">
-					<Dialog>
-						<DialogTrigger asChild>
-							<Button>{t("ask")}</Button>
-						</DialogTrigger>
-						<DialogContent className="space-y-4">
-							<DialogTitle>{t("askTitle")}</DialogTitle>
-							<Input
-								value={newQ}
-								onChange={(e) => setNewQ(e.target.value)}
-								placeholder={t("placeholder")}
-							/>
-							<Button onClick={createQuestion}>{t("submit")}</Button>
-						</DialogContent>
-					</Dialog>
-					<Button
-						variant="secondary"
-						onClick={submitOrder}
-						disabled={selected.length === 0}
-					>
-						{t("submit")}
-					</Button>
-				</div>
+										</li>
+									))}
+								</ul>
+							</CardContent>
+						</Card>
+					</div>
+				)}
+				{!showResults && (
+					<div className="flex justify-center gap-4">
+						<Dialog>
+							<DialogTrigger asChild>
+								<Button>{t("ask")}</Button>
+							</DialogTrigger>
+							<DialogContent className="space-y-4">
+								<DialogTitle>{t("askTitle")}</DialogTitle>
+								<Input
+									value={newQ}
+									onChange={(e) => setNewQ(e.target.value)}
+									placeholder={t("placeholder")}
+								/>
+								<Button onClick={createQuestion}>{t("submit")}</Button>
+							</DialogContent>
+						</Dialog>
+						<Button
+							variant="secondary"
+							onClick={submitOrder}
+							disabled={selected.length === 0}
+						>
+							{t("submit")}
+						</Button>
+					</div>
+				)}
 				{showResults && (
 					<div className="mx-auto max-w-3xl space-y-4">
 						<h2 className="text-center text-2xl font-bold">
@@ -203,10 +209,11 @@ export default function BioHackPage() {
 						<ul className="space-y-2">
 							{(() => {
 								const max = Math.max(...results.map((v) => v.votes), 1);
-								return results.map((r) => {
+								return results.map((r, idx) => {
 									const width = (r.votes / max) * 100;
 									return (
 										<li key={r.id} className="space-y-1">
+											<span className="mr-2 font-mono text-sm">{idx + 1}.</span>
 											<span>{r.content}</span>
 											<div className="relative h-4 rounded bg-muted">
 												<motion.div

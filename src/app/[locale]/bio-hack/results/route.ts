@@ -11,11 +11,16 @@ async function getResults() {
 			id: questions.id,
 			content: questions.content,
 			votes: sql<number>`count(${questionVotes.id})`.mapWith(Number),
+			pos: sql<number>`avg(${questionVotes.position})`.mapWith(Number),
 		})
 		.from(questions)
 		.leftJoin(questionVotes, eq(questionVotes.questionId, questions.id))
 		.groupBy(questions.id)
-		.orderBy(desc(sql`count(${questionVotes.id})`), questions.createdAt);
+		.orderBy(
+			sql`avg(${questionVotes.position}) nulls last`,
+			desc(sql`count(${questionVotes.id})`),
+			questions.createdAt,
+		);
 }
 
 export async function GET(request: Request) {
