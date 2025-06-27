@@ -4,7 +4,12 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+	Dialog,
+	DialogContent,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import {
 	createQuestion as createQuestionAction,
@@ -151,6 +156,7 @@ export default function BioHackPage() {
 							<Button>{t("ask")}</Button>
 						</DialogTrigger>
 						<DialogContent className="space-y-4">
+							<DialogTitle>{t("askTitle")}</DialogTitle>
 							<Input
 								value={newQ}
 								onChange={(e) => setNewQ(e.target.value)}
