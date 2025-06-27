@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -14,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import {
 	createQuestion as createQuestionAction,
 	fetchQuestions,
+	fetchResults,
 	submitVote,
 } from "./actions";
 
@@ -22,12 +24,20 @@ interface Question {
 	content: string;
 }
 
+interface Result {
+	id: number;
+	content: string;
+	votes: number;
+}
+
 export default function BioHackPage() {
 	const t = useTranslations("BioHack");
 	const locale = useLocale();
 	const [allQuestions, setAllQuestions] = useState<Question[]>([]);
 	const [selected, setSelected] = useState<Question[]>([]);
 	const [newQ, setNewQ] = useState("");
+	const [results, setResults] = useState<Result[]>([]);
+	const [showResults, setShowResults] = useState(false);
 
 	useEffect(() => {
 		fetchQuestions().then(setAllQuestions);
@@ -38,6 +48,17 @@ export default function BioHackPage() {
 		};
 		return () => es.close();
 	}, [locale]);
+
+	useEffect(() => {
+		if (!showResults) return;
+		fetchResults().then(setResults);
+		const es = new EventSource(`/${locale}/bio-hack/results`);
+		es.onmessage = (ev) => {
+			const data: Result[] = JSON.parse(ev.data);
+			setResults(data);
+		};
+		return () => es.close();
+	}, [showResults, locale]);
 
 	const moveUp = (idx: number) => {
 		if (idx === 0) return;
@@ -78,6 +99,7 @@ export default function BioHackPage() {
 	const submitOrder = async () => {
 		await submitVote(selected.map((q) => q.id));
 		setSelected([]);
+		setShowResults(true);
 	};
 
 	const createQuestion = async () => {
@@ -90,7 +112,7 @@ export default function BioHackPage() {
 	);
 
 	return (
-		<div className="min-h-screen bg-gradient-to-b from-primary to-secondary px-6 py-10 text-primary-foreground">
+		<div className="min-h-screen bg-gradient-to-b from-black to-[color:var(--color-biohack-green)] px-6 py-10 text-white">
 			<div className="mx-auto grid max-w-5xl gap-8">
 				<div className="space-y-2 text-center">
 					<h1 className="text-4xl font-bold">{t("title")}</h1>
@@ -173,8 +195,37 @@ export default function BioHackPage() {
 						{t("submit")}
 					</Button>
 				</div>
+				{showResults && (
+					<div className="mx-auto max-w-3xl space-y-4">
+						<h2 className="text-center text-2xl font-bold">
+							{t("resultsTitle")}
+						</h2>
+						<ul className="space-y-2">
+							{(() => {
+								const max = Math.max(...results.map((v) => v.votes), 1);
+								return results.map((r) => {
+									const width = (r.votes / max) * 100;
+									return (
+										<li key={r.id} className="space-y-1">
+											<span>{r.content}</span>
+											<div className="relative h-4 rounded bg-muted">
+												<motion.div
+													className="absolute left-0 top-0 h-4 rounded bg-[color:var(--color-biohack-green)]"
+													animate={{ width: `${width}%` }}
+													transition={{ type: "spring", duration: 0.5 }}
+												/>
+											</div>
+											<span className="text-sm">
+												{r.votes} {t("votes")}
+											</span>
+										</li>
+									);
+								});
+							})()}
+						</ul>
+					</div>
+				)}
 			</div>
 		</div>
 	);
-
 }
