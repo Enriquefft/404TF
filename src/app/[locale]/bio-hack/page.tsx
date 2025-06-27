@@ -85,7 +85,7 @@ export default function BioHackPage() {
 	);
 
 	return (
-		<div className="min-h-screen bg-gradient-to-b from-[color:var(--black)] to-[color:var(--color-biohack-green)] px-6 py-10 text-primary-foreground">
+		<div className="min-h-screen bg-gradient-to-b from-primary to-secondary px-6 py-10 text-primary-foreground">
 			<div className="mx-auto grid max-w-5xl gap-8">
 				<div className="space-y-2 text-center">
 					<h1 className="text-4xl font-bold">{t("title")}</h1>
