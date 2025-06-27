@@ -25,13 +25,13 @@ const TOTAL_COUNT = 404;
 const SLOW_END_EXPONENT = 3;
 
 function easeInOutQuad(t: number): number {
-	return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+	return t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
 }
 
 function getCount(t: number): number {
 	const clamped = t < 0 ? 0 : t > 1 ? 1 : t;
 	const x = easeInOutQuad(clamped);
-	const y = 1 - Math.pow(1 - x, SLOW_END_EXPONENT);
+	const y = 1 - (1 - x) ** SLOW_END_EXPONENT;
 	return Math.floor(y * TOTAL_COUNT);
 }
 

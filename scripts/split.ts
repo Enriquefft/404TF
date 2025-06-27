@@ -47,22 +47,22 @@ async function main() {
 	const parser = fs.createReadStream(inputPath).pipe(
 		parse({
 			columns: true,
+			relax_quotes: true,
 			skip_empty_lines: true,
 			trim: false,
-			relax_quotes: true,
 		}),
 	);
 
 	const stringifier = stringify({
-		header: true,
 		columns: ["Name", "Email", "Celular", "DNI", "Sector"],
+		header: true,
 	});
 
 	const outStream = fs.createWriteStream(outputPath);
 	stringifier.pipe(outStream);
 
 	for await (const record of parser) {
-		const raw = String(record["Nombre"] ?? "");
+		const raw = String(record.Nombre ?? "");
 		// Split on newline, trim each line, discard empties
 		const lines = raw
 			.split(/\r?\n/)
@@ -90,11 +90,11 @@ async function main() {
 		}
 
 		stringifier.write({
-			Name: name,
+			Celular: record.Celular ?? "",
+			DNI: record.DNI ?? "",
 			Email: email,
-			Celular: record["Celular"] ?? "",
-			DNI: record["DNI"] ?? "",
-			Sector: record["Sector"] ?? "",
+			Name: name,
+			Sector: record.Sector ?? "",
 		});
 	}
 

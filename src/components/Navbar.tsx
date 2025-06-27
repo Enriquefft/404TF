@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-
-import { ModeToggle } from "./mode-toggle";
+import { useState } from "react";
+import { Link } from "@/i18n/navigation";
 import { LocaleToggle } from "./locale-toggle";
+import { ModeToggle } from "./mode-toggle";
 
 export default function Navbar() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
