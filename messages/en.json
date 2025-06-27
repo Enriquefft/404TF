@@ -47,25 +47,24 @@
 			"subscribe": "Subscribe",
 			"whatsappCTA": "Join our WhatsApp Community"
 		},
-		"preincubation": "Program",
-		"preview": {
-			"deeptechSummit": {
-				"cta": "Get tickets",
-				"subtitle": "Join LATAM’s premier deep-tech event this September.",
-				"title": "Deeptech Summit 2025"
-			},
-			"preIncubation": {
-				"cta": "Learn more",
-				"subtitle": "Our inaugural cohort is in progress. Stay tuned for Cohort β.",
-				"title": "Pre-incubation Program"
-			}
-		},
-		"summit": "Summit"
+
+		"footer": {
+			"rights": "All rights reserved."
+		}
 	},
-	"Rebrand": {
-		"message": "Our new look is in the works. This page isn’t ready for public eyes.",
-		"soon": "Check back soon!",
-		"tagline": "Building the 404 deep-tech startups of LATAM.",
-		"title": "We're refreshing our site"
-	}
+        "Rebrand": {
+                "title": "We're refreshing our site",
+                "message": "Our new look is in the works. This page isn’t ready for public eyes.",
+                "tagline": "Building the 404 deep-tech startups of LATAM.",
+                "soon": "Check back soon!"
+        },
+        "BioHack": {
+                "title": "404_BIO://HACK",
+                "intro": "Our panel is about to start. Help us prioritise questions by ordering them below.",
+                "ask": "Ask a new question",
+                "submit": "Submit",
+                "yourQuestions": "Your priority list",
+                "allQuestions": "All questions",
+                "placeholder": "Type your question"
+        }
 }
