@@ -17,13 +17,14 @@ Welcome to **404 Tech Found's** website project. This monorepo contains the code
 ## 2. Development
 - Install dependencies with `bun install`.
 - Run the dev server with `bun dev` and open <http://localhost:3000>.
-- Build for production with `bun run build`.
+- Build for production with `bun run build` when deploying.
 - All commands assume you have run `bunx lefthook install` once.
 
 ### Testing and Type‑checking
 - Unit tests run with Bun using Happy DOM. Execute `bun test`.
-- Type checks use TypeScript. Run `bunx tsc --noEmit`.
-- Run both checks before pushing with `bunx lefthook run pre-push`.
+- Type checks use TypeScript via the `bun type` script.
+- Lint and format the code with `biome check`.
+- Run all these checks before pushing with `bunx lefthook run pre-push`.
 
 ### Linting and Formatting
 - The project uses [Biome](https://biomejs.dev). Format and lint staged files with `bunx lefthook run pre-commit`.
@@ -58,9 +59,11 @@ When editing copy or UI texts, keep the tone defined in `docs/brand.md`:
 
 ## 6. Pull Request Checklist
 Before opening a PR the agent must:
-1. Run `bunx lefthook run pre-commit`.
-2. Run `bunx lefthook run pre-push`.
-3. Ensure all tests pass and the build succeeds.
-4. Follow the commit message convention.
+1. Run `biome check`.
+2. Run `bun type`.
+3. Run `bun test`.
+4. Run `bunx lefthook run pre-commit`.
+5. Run `bunx lefthook run pre-push`.
+6. Follow the commit message convention.
 
 Happy hacking!
