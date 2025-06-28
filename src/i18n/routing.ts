@@ -6,7 +6,7 @@ export const localesSchema = z.enum(locales);
 
 export const routing = defineRouting({
 	// Supported locales:
-	locales,
-	// Default locale if none matched:
 	defaultLocale: "en",
+	// Default locale if none matched:
+	locales,
 });

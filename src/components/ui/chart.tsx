@@ -228,9 +228,9 @@ function ChartTooltipContent<
 													{
 														"h-2.5 w-2.5": indicator === "dot",
 														"my-0.5": nestLabel && indicator === "dashed",
+														"w-1": indicator === "line",
 														"w-0 border-[1.5px] border-dashed bg-transparent":
 															indicator === "dashed",
-														"w-1": indicator === "line",
 													},
 												)}
 												style={

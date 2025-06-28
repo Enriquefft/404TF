@@ -1,12 +1,12 @@
-import { Inter, Orbitron, Fira_Code } from "next/font/google";
+import { Fira_Code, Inter, Orbitron } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const orbitron = Orbitron({
+	display: "swap",
 	subsets: ["latin"],
 	variable: "--font-mono",
 	weight: ["400", "700"],
-	display: "swap",
 });
 
 const firacode = Fira_Code({
