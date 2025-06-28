@@ -1,7 +1,9 @@
 "use client";
 
+import { LayoutGroup } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { ResultBar } from "@/components/results-graph";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -14,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import {
 	createQuestion as createQuestionAction,
 	fetchQuestions,
+	fetchResults,
 	submitVote,
 } from "./actions";
 
@@ -22,12 +25,22 @@ interface Question {
 	content: string;
 }
 
+interface Result {
+	id: number;
+	content: string;
+	votes: number;
+	avgPos: number;
+	score: number;
+}
+
 export default function BioHackPage() {
 	const t = useTranslations("BioHack");
 	const locale = useLocale();
 	const [allQuestions, setAllQuestions] = useState<Question[]>([]);
 	const [selected, setSelected] = useState<Question[]>([]);
 	const [newQ, setNewQ] = useState("");
+	const [results, setResults] = useState<Result[]>([]);
+	const [showResults, setShowResults] = useState(false);
 
 	useEffect(() => {
 		fetchQuestions().then(setAllQuestions);
@@ -38,6 +51,17 @@ export default function BioHackPage() {
 		};
 		return () => es.close();
 	}, [locale]);
+
+	useEffect(() => {
+		if (!showResults) return;
+		fetchResults().then(setResults);
+		const es = new EventSource(`/${locale}/bio-hack/results`);
+		es.onmessage = (ev) => {
+			const data: Result[] = JSON.parse(ev.data);
+			setResults(data);
+		};
+		return () => es.close();
+	}, [showResults, locale]);
 
 	const moveUp = (idx: number) => {
 		if (idx === 0) return;
@@ -78,6 +102,7 @@ export default function BioHackPage() {
 	const submitOrder = async () => {
 		await submitVote(selected.map((q) => q.id));
 		setSelected([]);
+		setShowResults(true);
 	};
 
 	const createQuestion = async () => {
@@ -89,92 +114,132 @@ export default function BioHackPage() {
 		(q) => !selected.some((s) => s.id === q.id),
 	);
 
+	const maxVotes = useMemo(() => {
+		return Math.max(...results.map((r) => r.votes), 1);
+	}, [results]);
+
+	const maxPos = useMemo(() => {
+		return Math.max(...results.map((r) => r.pos ?? 0), 1);
+	}, [results]);
+
+	const totalBallots = useMemo(() => {
+		// fetchResults now returns U and maxPos? if not, pass U from server
+		return results.U; // assume results include U
+	}, [results]);
+
+	const maxPossiblePos = useMemo(() => {
+		return results.maxPos; // assume results include maxPos
+	}, [results]);
+
+	const sortedResults: Result[] = useMemo(() => {
+		const α = 0.6;
+		return [...results.data]
+			.map((r) => {
+				const approval = r.votes / totalBallots;
+				const priority = 1 - (r.avgPos - 1) / maxPossiblePos;
+				return { ...r, score: α * approval + (1 - α) * priority };
+			})
+			.sort((a, b) => b.score - a.score);
+	}, [results, totalBallots, maxPossiblePos]);
+
 	return (
-		<div className="min-h-screen bg-gradient-to-b from-primary to-secondary px-6 py-10 text-primary-foreground">
+		<div className="min-h-screen bg-gradient-to-b from-black to-[color:var(--color-biohack-green)] px-6 py-10 text-white">
 			<div className="mx-auto grid max-w-5xl gap-8">
 				<div className="space-y-2 text-center">
 					<h1 className="text-4xl font-bold">{t("title")}</h1>
 					<p>{t("intro")}</p>
 				</div>
-				<div className="grid gap-6 md:grid-cols-2">
-					<Card className="bg-background/60 backdrop-blur">
-						<CardHeader>
-							<CardTitle>{t("yourQuestions")}</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<ul className="space-y-2">
-								{selected.map((q, idx) => (
-									<li
-										key={q.id}
-										className="flex items-center justify-between rounded-md border bg-background/80 px-3 py-2"
-									>
-										<span>{q.content}</span>
-										<div className="flex gap-1">
-											<Button size="icon" onClick={() => moveUp(idx)}>
-												↑
+				{!showResults && (
+					<div className="grid gap-6 md:grid-cols-2">
+						<Card className="bg-background/60 backdrop-blur">
+							<CardHeader>
+								<CardTitle>{t("yourQuestions")}</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ul className="space-y-2">
+									{selected.map((q, idx) => (
+										<li
+											key={q.id}
+											className="flex items-center justify-between rounded-md border bg-background/80 px-3 py-2"
+										>
+											<span className="mr-2 font-mono text-sm">{idx + 1}.</span>
+											<span className="flex-1">{q.content}</span>
+											<div className="flex gap-1">
+												<Button size="icon" onClick={() => moveUp(idx)}>
+													↑
+												</Button>
+												<Button size="icon" onClick={() => moveDown(idx)}>
+													↓
+												</Button>
+												<Button
+													size="icon"
+													variant="destructive"
+													onClick={() => removeSelected(idx)}
+												>
+													✕
+												</Button>
+											</div>
+										</li>
+									))}
+								</ul>
+							</CardContent>
+						</Card>
+						<Card className="bg-background/60 backdrop-blur">
+							<CardHeader>
+								<CardTitle>{t("allQuestions")}</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ul className="space-y-2">
+									{remaining.map((q) => (
+										<li
+											key={q.id}
+											className="flex items-center justify-between rounded-md border bg-background/80 px-3 py-2"
+										>
+											<span>{q.content}</span>
+											<Button size="sm" onClick={() => addToSelected(q)}>
+												+
 											</Button>
-											<Button size="icon" onClick={() => moveDown(idx)}>
-												↓
-											</Button>
-											<Button
-												size="icon"
-												variant="destructive"
-												onClick={() => removeSelected(idx)}
-											>
-												✕
-											</Button>
-										</div>
-									</li>
-								))}
-							</ul>
-						</CardContent>
-					</Card>
-					<Card className="bg-background/60 backdrop-blur">
-						<CardHeader>
-							<CardTitle>{t("allQuestions")}</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<ul className="space-y-2">
-								{remaining.map((q) => (
-									<li
-										key={q.id}
-										className="flex items-center justify-between rounded-md border bg-background/80 px-3 py-2"
-									>
-										<span>{q.content}</span>
-										<Button size="sm" onClick={() => addToSelected(q)}>
-											+
-										</Button>
-									</li>
-								))}
-							</ul>
-						</CardContent>
-					</Card>
-				</div>
-				<div className="flex justify-center gap-4">
-					<Dialog>
-						<DialogTrigger asChild>
-							<Button>{t("ask")}</Button>
-						</DialogTrigger>
-						<DialogContent className="space-y-4">
-							<DialogTitle>{t("askTitle")}</DialogTitle>
-							<Input
-								value={newQ}
-								onChange={(e) => setNewQ(e.target.value)}
-								placeholder={t("placeholder")}
-							/>
-							<Button onClick={createQuestion}>{t("submit")}</Button>
-						</DialogContent>
-					</Dialog>
-					<Button
-						variant="secondary"
-						onClick={submitOrder}
-						disabled={selected.length === 0}
-					>
-						{t("submit")}
-					</Button>
-				</div>
+										</li>
+									))}
+								</ul>
+							</CardContent>
+						</Card>
+					</div>
+				)}
+				{!showResults && (
+					<div className="flex justify-center gap-4">
+						<Dialog>
+							<DialogTrigger asChild>
+								<Button>{t("ask")}</Button>
+							</DialogTrigger>
+							<DialogContent className="space-y-4">
+								<DialogTitle>{t("askTitle")}</DialogTitle>
+								<Input
+									value={newQ}
+									onChange={(e) => setNewQ(e.target.value)}
+									placeholder={t("placeholder")}
+								/>
+								<Button onClick={createQuestion}>{t("submit")}</Button>
+							</DialogContent>
+						</Dialog>
+						<Button
+							variant="secondary"
+							onClick={submitOrder}
+							disabled={selected.length === 0}
+						>
+							{t("submit")}
+						</Button>
+					</div>
+				)}
 			</div>
+			{showResults && (
+				<div className="mx-auto space-y-4 max-w-5xl mt-10">
+					<h2 className="text-center text-2xl font-bold">
+						{t("resultsTitle")}
+					</h2>
+					<ResultBar results={sortedResults} />
+				</div>
+			)}
 		</div>
 	);
-
 }

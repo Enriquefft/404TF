@@ -1,4 +1,4 @@
-import { EventEmitter } from "events";
+import { EventEmitter } from "node:events";
 import type { SelectQuestion } from "@/db/schema";
 
 export const questionEvents = new EventEmitter();

@@ -5,25 +5,27 @@
 		"askTitle": "Pregunta",
 		"intro": "Nuestro panel está por comenzar. Ayúdanos a priorizar preguntas ordenándolas abajo.",
 		"placeholder": "Escribe tu pregunta",
+		"resultsTitle": "Preguntas principales",
 		"submit": "Enviar",
 		"title": "404_BIO://HACK",
+		"votes": "votos",
 		"yourQuestions": "Tu lista priorizada"
 	},
 	"Home": {
 		"about": {
 			"heading": "Sobre Nosotros",
 			"learnMore": "Más información",
-			"text": "404 Tech Found es la pre-incubadora deep-tech de LATAM, creada por fundadores para fundadores. Convertimos avances de Biotech, IA y Hardware en startups escalables."
+			"text": "404 Tech Found es la pre-incubadora deep-tech de LATAM, creada por fundadores para fundadores. Convertimos ciencia de frontera en empresas escalables."
 		},
 		"blog": "Blog",
 		"contact": "Contacto",
-		"corporatePartners": "Socios Corporativos",
+		"corporatePartners": "Aliados corporativos",
 		"footer": {
 			"rights": "Todos los derechos reservados."
 		},
 		"form": {
 			"heading": "Ayúdanos a personalizar tu experiencia. ¿Quién eres?",
-			"subheading": "Selecciona una opción para enviarte información relevante."
+			"subheading": "Elige una opción para poder hacer seguimiento con información relevante."
 		},
 		"foundersResearchers": "Fundadores / Investigadores",
 		"governmentAgencies": "Gobierno / Agencias",
@@ -46,25 +48,15 @@
 			"subheading": "Suscríbete para actualizaciones, EN/ES.",
 			"subscribe": "Suscribir",
 			"whatsappCTA": "Únete a nuestra comunidad de WhatsApp"
-		},
-
-		"footer": {
-			"rights": "Todos los derechos reservados."
 		}
 	},
-        "Rebrand": {
-                "title": "Estamos renovando el sitio",
-                "message": "Nuestra nueva imagen está en camino. Esta página aún no está lista para el público.",
-                "tagline": "Construyendo las startups deep-tech 404 de LATAM.",
-                "soon": "Vuelve pronto"
-        },
-        "BioHack": {
-                "title": "404_BIO://HACK",
-                "intro": "Nuestro panel está por comenzar. Ayúdanos a priorizar preguntas ordenándolas abajo.",
-                "ask": "Pregunta nueva",
-                "submit": "Enviar",
-                "yourQuestions": "Tu lista priorizada",
-                "allQuestions": "Todas las preguntas",
-                "placeholder": "Escribe tu pregunta"
-        }
+	"Rebrand": {
+		"eventBanner": "Únete a BioHack",
+		"learnMore": "Conocé más sobre BioHack",
+		"message": "Nuestro nuevo diseño está en camino. Esta página aún no está lista para el público.",
+		"soon": "Vuelve pronto",
+		"tagline": "Building the 404 deep-tech startups of LATAM.",
+		"title": "Estamos refrescando nuestro sitio",
+		"visitEvent": "Visitar BioHack"
+	}
 }
