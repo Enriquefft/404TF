@@ -24,19 +24,19 @@ export async function fetchResults() {
 	}
 	const U = totalBallots.U;
 
-	// maximum possible position (max k_i+1)
+	const sub = db
+		.select({
+			batchId: questionVotes.batchId,
+			cnt: sql<number>`count(*)`.mapWith(Number).as("cnt"),
+		})
+		.from(questionVotes)
+		.groupBy(questionVotes.batchId)
+		.as("sub");
+
 	const maxPosRes = await db
-		.select({ maxPos: sql<number>`max(cnt + 1)`.mapWith(Number) })
-		.from(
-			db
-				.select({
-					batchId: questionVotes.batchId,
-					cnt: sql<number>`count(*)`.mapWith(Number),
-				})
-				.from(questionVotes)
-				.groupBy(questionVotes.batchId)
-				.as("sub"),
-		);
+		.select({ maxPos: sql<number>`max("cnt" + 1)`.mapWith(Number) })
+		.from(sub);
+
 	const maxPos = maxPosRes[0]?.maxPos ?? 1;
 
 	const v = alias(questionVotes, "v");
