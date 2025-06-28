@@ -50,11 +50,13 @@
 			"whatsappCTA": "Únete a nuestra comunidad de WhatsApp"
 		}
 	},
-        "Rebrand": {
-                "message": "Nuestro nuevo diseño está en camino. Esta página aún no está lista para el público.",
-                "soon": "Vuelve pronto",
-                "tagline": "Building the 404 deep-tech startups of LATAM.",
-                "title": "Estamos refrescando nuestro sitio",
-                "eventBanner": "Únete a BioHack"
-        }
+	"Rebrand": {
+		"message": "Nuestro nuevo diseño está en camino. Esta página aún no está lista para el público.",
+		"soon": "Vuelve pronto",
+		"tagline": "Building the 404 deep-tech startups of LATAM.",
+		"title": "Estamos refrescando nuestro sitio",
+		"eventBanner": "Únete a BioHack",
+		"visitEvent": "Visitar BioHack",
+		"learnMore": "Conocé más sobre BioHack"
+	}
 }

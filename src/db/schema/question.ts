@@ -4,13 +4,15 @@ import { createInsertSchema } from "drizzle-zod";
 import { schema } from "./schema.ts";
 
 export const questions = schema.table(
-  "biohack_question",
-  {
-    id: serial("id").primaryKey(),
-    content: text("content").notNull(),
-    createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
-  },
-  (q) => [index("created_idx").on(q.createdAt)]
+	"biohack_question",
+	{
+		content: text("content").notNull(),
+		createdAt: timestamp("created_at")
+			.default(sql`CURRENT_TIMESTAMP`)
+			.notNull(),
+		id: serial("id").primaryKey(),
+	},
+	(q) => [index("created_idx").on(q.createdAt)],
 );
 
 export const insertQuestionSchema = createInsertSchema(questions);

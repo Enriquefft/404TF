@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { LayoutGroup } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { ResultBar } from "@/components/results-graph";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -28,7 +29,8 @@ interface Result {
 	id: number;
 	content: string;
 	votes: number;
-	pos: number | null;
+	avgPos: number;
+	score: number;
 }
 
 export default function BioHackPage() {
@@ -111,6 +113,34 @@ export default function BioHackPage() {
 	const remaining = allQuestions.filter(
 		(q) => !selected.some((s) => s.id === q.id),
 	);
+
+	const maxVotes = useMemo(() => {
+		return Math.max(...results.map((r) => r.votes), 1);
+	}, [results]);
+
+	const maxPos = useMemo(() => {
+		return Math.max(...results.map((r) => r.pos ?? 0), 1);
+	}, [results]);
+
+	const totalBallots = useMemo(() => {
+		// fetchResults now returns U and maxPos? if not, pass U from server
+		return results.U; // assume results include U
+	}, [results]);
+
+	const maxPossiblePos = useMemo(() => {
+		return results.maxPos; // assume results include maxPos
+	}, [results]);
+
+	const sortedResults: Result[] = useMemo(() => {
+		const α = 0.6;
+		return [...results.data]
+			.map((r) => {
+				const approval = r.votes / totalBallots;
+				const priority = 1 - (r.avgPos - 1) / maxPossiblePos;
+				return { ...r, score: α * approval + (1 - α) * priority };
+			})
+			.sort((a, b) => b.score - a.score);
+	}, [results, totalBallots, maxPossiblePos]);
 
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-black to-[color:var(--color-biohack-green)] px-6 py-10 text-white">
@@ -201,37 +231,15 @@ export default function BioHackPage() {
 						</Button>
 					</div>
 				)}
-				{showResults && (
-					<div className="mx-auto max-w-3xl space-y-4">
-						<h2 className="text-center text-2xl font-bold">
-							{t("resultsTitle")}
-						</h2>
-						<div className="flex flex-col gap-4">
-							{(() => {
-								const maxVotes = Math.max(...results.map((v) => v.votes), 1);
-								const maxPos = Math.max(...results.map((v) => v.pos ?? 0), 1);
-								return results.map((r) => {
-									const voteScore = r.votes / maxVotes;
-									const posScore = r.pos == null ? 0 : 1 - r.pos / maxPos;
-									const width = (voteScore * 0.6 + posScore * 0.4) * 100;
-									return (
-										<div key={r.id} className="space-y-1">
-											<span>{r.content}</span>
-											<div className="relative h-6 rounded bg-muted">
-												<motion.div
-													className="absolute left-0 top-0 h-6 rounded bg-[color:var(--color-biohack-green)]"
-													animate={{ width: `${width}%` }}
-													transition={{ duration: 0.6, type: "spring" }}
-												/>
-											</div>
-										</div>
-									);
-								});
-							})()}
-						</div>
-					</div>
-				)}
 			</div>
+			{showResults && (
+				<div className="mx-auto space-y-4 max-w-5xl mt-10">
+					<h2 className="text-center text-2xl font-bold">
+						{t("resultsTitle")}
+					</h2>
+					<ResultBar results={sortedResults} />
+				</div>
+			)}
 		</div>
 	);
 }
