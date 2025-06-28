@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Countdown } from "@/components/Countdown";
-import { Link } from "@/i18n/navigation";
 
 export default function Page() {
 	const t = useTranslations("Rebrand");
@@ -19,11 +18,11 @@ export default function Page() {
 						priority
 					/>
 					<div className="my-auto">
-						<Link href="/bio-hack">
+						<a href="https://lu.ma/iavg1gc5">
 							<p className="text-2xl font-bold shadow-lg text-white rounded-lg p-4 bg-gradient-to-r from-biohack to-secondary hover:from-secondary hover:to-biohack transition-colors duration-300">
 								{t("eventBanner")}
 							</p>
-						</Link>
+						</a>
 						<Countdown eventTimeCST="2025-06-28T10:00:00" />
 					</div>
 				</div>
