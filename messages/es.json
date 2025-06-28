@@ -51,12 +51,12 @@
 		}
 	},
 	"Rebrand": {
+		"eventBanner": "Únete a BioHack",
+		"learnMore": "Conocé más sobre BioHack",
 		"message": "Nuestro nuevo diseño está en camino. Esta página aún no está lista para el público.",
 		"soon": "Vuelve pronto",
 		"tagline": "Building the 404 deep-tech startups of LATAM.",
 		"title": "Estamos refrescando nuestro sitio",
-		"eventBanner": "Únete a BioHack",
-		"visitEvent": "Visitar BioHack",
-		"learnMore": "Conocé más sobre BioHack"
+		"visitEvent": "Visitar BioHack"
 	}
 }

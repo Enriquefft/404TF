@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
-import { useTransition, animated } from "react-spring";
 import { scaleLinear } from "d3-scale";
+import { useMemo } from "react";
+import { animated, useTransition } from "react-spring";
 
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
+
 interface Result {
 	id: number;
 	content: string;
@@ -18,13 +19,13 @@ interface ChartBarHorizontalDynamicProps {
 }
 
 const chartConfig: ChartConfig = {
-	score: {
-		label: "Composite Score",
-		color: "var(--chart-1)",
-	},
 	avgPos: {
-		label: "Average Position",
 		color: "var(--chart-2)",
+		label: "Average Position",
+	},
+	score: {
+		color: "var(--chart-1)",
+		label: "Composite Score",
 	},
 };
 
@@ -34,11 +35,11 @@ export function ResultBar({ results }: ChartBarHorizontalDynamicProps) {
 			results
 				.sort((a, b) => b.score - a.score)
 				.map((r, index) => ({
+					avgPos: r.avgPos,
 					id: r.id,
+					index,
 					name: r.content,
 					score: r.score,
-					avgPos: r.avgPos,
-					index,
 				})),
 		[results],
 	);
@@ -59,19 +60,19 @@ export function ResultBar({ results }: ChartBarHorizontalDynamicProps) {
 	);
 
 	const transitions = useTransition(data, {
-		keys: (d) => d.id,
-		from: { width: 0, y: 0, opacity: 0 },
+		config: { friction: 30, tension: 200 },
 		enter: (d) => ({
+			opacity: 1,
 			width: xScale(d.score),
 			y: d.index * (barHeight + gap),
-			opacity: 1,
 		}),
+		from: { opacity: 0, width: 0, y: 0 },
+		keys: (d) => d.id,
+		leave: { opacity: 0, width: 0 },
 		update: (d) => ({
 			width: xScale(d.score),
 			y: d.index * (barHeight + gap),
 		}),
-		leave: { width: 0, opacity: 0 },
-		config: { tension: 200, friction: 30 },
 	});
 
 	return (

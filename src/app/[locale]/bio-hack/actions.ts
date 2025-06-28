@@ -37,9 +37,9 @@ export async function fetchResults() {
 	// aggregate per question
 	return db
 		.select({
-			id: questions.id,
-			content: questions.content,
 			avgPos: sql<number>`avg(v.position)`.mapWith(Number),
+			content: questions.content,
+			id: questions.id,
 			votes:
 				sql<number>`sum(case when v.position<${maxPos} then 1 else 0 end)`.mapWith(
 					Number,
