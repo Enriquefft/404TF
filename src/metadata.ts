@@ -6,11 +6,8 @@ export const metadata: Metadata = {
 			url: "https://www.linkedin.com/in/enriqueflores000/",
 		},
 	],
-	description: "Nextjs template",
-	keywords: ["Nextjs", "fullstack", "templates"],
+	description: "404 Tech Found - deeptech pre-incubator",
+	keywords: ["404 Tech Found", "startups", "deeptech", "biotech"],
 	metadataBase: new URL("https://next-learn-dashboard.vercel.sh"),
-	title: {
-		default: "Nextjs template",
-		template: "%s | Nextjs template",
-	},
+	title: "404 Tech Found",
 };
