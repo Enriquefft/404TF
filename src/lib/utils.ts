@@ -35,14 +35,13 @@ export const getBaseUrl = () => {
 };
 /** biome-ignore-end lint/complexity/useLiteralKeys: On this file, we need to use string keys for the env object. */
 
-// biome-ignore lint/suspicious/noExplicitAny: generic debounce requires any args
-export function debounce<T extends (...args: any[]) => any>(
-	func: T,
+export function debounce<Args extends unknown[], Return>(
+	func: (...args: Args) => Return,
 	wait: number,
-): (...args: Parameters<T>) => void {
+): (...args: Args) => void {
 	let timeout: ReturnType<typeof setTimeout> | null = null;
 
-	return (...args: Parameters<T>): void => {
+	return (...args: Args): void => {
 		const later = () => {
 			timeout = null;
 			func(...args);

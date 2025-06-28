@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/db";
-import { questions, insertQuestionSchema } from "@/db/schema";
+import { insertQuestionSchema, questions } from "@/db/schema";
 import { broadcastQuestion } from "@/lib/questionEvents";
 
 export async function GET() {

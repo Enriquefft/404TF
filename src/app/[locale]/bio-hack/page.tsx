@@ -1,6 +1,5 @@
 "use client";
 
-import { LayoutGroup } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { ResultBar } from "@/components/results-graph";
@@ -33,13 +32,19 @@ interface Result {
 	score: number;
 }
 
+interface ResultsData {
+	results: Result[];
+	U: number;
+	maxPos: number;
+}
+
 export default function BioHackPage() {
 	const t = useTranslations("BioHack");
 	const locale = useLocale();
 	const [allQuestions, setAllQuestions] = useState<Question[]>([]);
 	const [selected, setSelected] = useState<Question[]>([]);
 	const [newQ, setNewQ] = useState("");
-	const [results, setResults] = useState<Result[]>([]);
+	const [results, setResults] = useState<ResultsData | null>(null);
 	const [showResults, setShowResults] = useState(false);
 
 	useEffect(() => {
@@ -57,7 +62,7 @@ export default function BioHackPage() {
 		fetchResults().then(setResults);
 		const es = new EventSource(`/${locale}/bio-hack/results`);
 		es.onmessage = (ev) => {
-			const data: Result[] = JSON.parse(ev.data);
+			const data: ResultsData = JSON.parse(ev.data);
 			setResults(data);
 		};
 		return () => es.close();
@@ -114,33 +119,10 @@ export default function BioHackPage() {
 		(q) => !selected.some((s) => s.id === q.id),
 	);
 
-	const maxVotes = useMemo(() => {
-		return Math.max(...results.map((r) => r.votes), 1);
-	}, [results]);
-
-	const maxPos = useMemo(() => {
-		return Math.max(...results.map((r) => r.pos ?? 0), 1);
-	}, [results]);
-
-	const totalBallots = useMemo(() => {
-		// fetchResults now returns U and maxPos? if not, pass U from server
-		return results.U; // assume results include U
-	}, [results]);
-
-	const maxPossiblePos = useMemo(() => {
-		return results.maxPos; // assume results include maxPos
-	}, [results]);
-
-	const sortedResults: Result[] = useMemo(() => {
-		const α = 0.6;
-		return [...results.data]
-			.map((r) => {
-				const approval = r.votes / totalBallots;
-				const priority = 1 - (r.avgPos - 1) / maxPossiblePos;
-				return { ...r, score: α * approval + (1 - α) * priority };
-			})
-			.sort((a, b) => b.score - a.score);
-	}, [results, totalBallots, maxPossiblePos]);
+	const sortedResults: Result[] = useMemo(
+		() => results?.results ?? [],
+		[results],
+	);
 
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-black to-[color:var(--color-biohack-green)] px-6 py-10 text-white">

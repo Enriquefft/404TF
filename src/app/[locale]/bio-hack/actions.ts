@@ -1,6 +1,7 @@
 "use server";
 
-import { desc, eq, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
+import { alias } from "drizzle-orm/pg-core";
 import { db } from "@/db";
 import {
 	insertQuestionSchema,
@@ -14,49 +15,57 @@ export async function fetchQuestions() {
 }
 export async function fetchResults() {
 	// total ballots U
-	const [total_ballots] = await db
+	const [totalBallots] = await db
 		.select({ U: sql<number>`count(*)`.mapWith(Number) })
 		.from(voteBatches);
 
-	if (!total_ballots) {
+	if (!totalBallots) {
 		throw new Error("No votes found");
 	}
-	const U = total_ballots.U;
+	const U = totalBallots.U;
 
-	// maximum possible position (max k_i+1)
-	const [{ maxPos }] = await db
-		.select({ maxPos: sql<number>`max(cnt+1)`.mapWith(Number) })
-		.from(
-			sql`(
-        select batch_id, count(*) as cnt
-        from biohack_vote
-        group by batch_id
-      )`.as("sub"),
-		);
-
-	// aggregate per question
-	return db
+	const sub = db
 		.select({
-			avgPos: sql<number>`avg(v.position)`.mapWith(Number),
+			batchId: questionVotes.batchId,
+			cnt: sql<number>`count(*)`.mapWith(Number).as("cnt"),
+		})
+		.from(questionVotes)
+		.groupBy(questionVotes.batchId)
+		.as("sub");
+
+	const maxPosRes = await db
+		.select({ maxPos: sql<number>`max("cnt" + 1)`.mapWith(Number) })
+		.from(sub);
+
+	const maxPos = maxPosRes[0]?.maxPos ?? 1;
+
+	const v = alias(questionVotes, "v");
+
+	const rows = await db
+		.select({
+			avgPos: sql<number>`avg(${v.position})`.mapWith(Number),
 			content: questions.content,
 			id: questions.id,
 			votes:
-				sql<number>`sum(case when v.position<${maxPos} then 1 else 0 end)`.mapWith(
+				sql<number>`sum(case when ${v.position} < ${maxPos} then 1 else 0 end)`.mapWith(
 					Number,
 				),
 		})
 		.from(questions)
-		.leftJoin(questionVotes.as("v"), eq(sql`v.question_id`, questions.id))
-		.groupBy(questions.id)
-		.orderBy(
-			// compute composite score inline
-			sql<number>`
-        (
-          0.6 * (sum(case when v.position<${maxPos} then 1 else 0 end)/${U})
-        +  0.4 * (1 - ((avg(v.position)-1)/${maxPos}))
-        )
-      `.desc(),
-		);
+		.leftJoin(v, eq(v.questionId, questions.id))
+		.groupBy(questions.id);
+
+	const alpha = 0.6;
+	const results = rows
+		.map((r) => {
+			const approval = r.votes / U;
+			const priority = 1 - (r.avgPos - 1) / maxPos;
+			const score = alpha * approval + (1 - alpha) * priority;
+			return { ...r, score };
+		})
+		.sort((a, b) => b.score - a.score);
+
+	return { maxPos, results, U };
 }
 
 const newQuestionSchema = insertQuestionSchema.pick({ content: true });
@@ -80,7 +89,7 @@ export async function submitVote(order: number[]) {
 	// count selections
 	const k = order.length;
 	// for each question, insert either its position or implicit last-place
-	const rows = [];
+	const rows: (typeof questionVotes.$inferInsert)[] = [];
 
 	for (const [i, qId] of order.entries()) {
 		rows.push({

@@ -2,16 +2,14 @@ import "@/styles/globals.css";
 
 export { metadata } from "@/metadata";
 
+import { notFound } from "next/navigation";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import ClientRoot from "@/components/ClientRoot";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { inter as fontSans } from "@/styles/fonts";
-
-import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
-
-import ClientRoot from "@/components/ClientRoot";
 
 export function generateStaticParams() {
 	return routing.locales.map((locale) => ({ locale }));
